@@ -1,41 +1,52 @@
 import { FC, ReactElement } from "react"
+import { Avatar, Space, Table, TableProps } from "antd"
+import { DeleteOutlined, UserOutlined } from "@ant-design/icons"
 
 import { useUsersContext } from "../context"
+import { User } from "../services/UsersApi.ts"
 
-interface UsersTableProps {}
+const columns: TableProps<User>['columns'] = [
+    {
+        title: 'Nombre',
+        key: 'name',
+        render: (_, record) => (
+            <Space size="middle">
+                <Avatar
+                    size={48}
+                    src={record.photo}
+                    // UserOutlined icon as an image fallback
+                    icon={<UserOutlined />}
+                />
+                <a>{record.name}</a>
+            </Space>
+        )
+    }, {
+        title: 'Descripción',
+        dataIndex: 'description',
+    }, {
+        title: 'Acciones',
+        key: 'id',
+        render: (_, record) => (
+            <DeleteOutlined
+                style={{ fontSize: '32px' }}
+                onClick={ () => console.log('delete ', record.id)}
+            />
+        )
+    }
+]
 
-const UsersTable: FC<UsersTableProps> = (): ReactElement => {
-    const { users, fetchPage } = useUsersContext()
-
+const UsersTable: FC = (): ReactElement => {
+    const { tableUsers, tablePagination, fetchPage } = useUsersContext()
     return (
-        <>
-            <table>
-                <tbody>
-                {users.length == 0 && (
-                    <tr>
-                        <td>Sin datos</td>
-                    </tr>
-                )}
-                {users.map(user => (
-                    <tr key={user.id}>
-                        <td>
-                            <img src={user.photo} alt={user.name}/>
-                        </td>
-                        <td>
-                            <a href="#">{user.name}</a>
-                        </td>
-                        <td>
-                            <button>X</button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-            <button onClick={() => fetchPage(1)}>1</button>
-            <button onClick={() => fetchPage(2)}>2</button>
-            <button onClick={() => fetchPage(3)}>3</button>
-            <button onClick={() => fetchPage(4)}>4</button>
-        </>
+        <Table
+            columns={columns}
+            rowKey={'id'}
+            dataSource={tableUsers}
+            pagination={{
+                ...tablePagination,
+                onChange: (newPage) => fetchPage(newPage)
+            }}
+        />
     )
 }
 
