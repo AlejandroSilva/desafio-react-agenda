@@ -28,7 +28,7 @@ const columns: TableProps<User>['columns'] = [
         key: 'id',
         render: (_, record) => (
             <DeleteOutlined
-                style={{ fontSize: '32px' }}
+                style={{ fontSize: '24px' }}
                 onClick={ () => console.log('delete ', record.id)}
             />
         )
