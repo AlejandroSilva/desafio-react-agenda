@@ -6,6 +6,8 @@ export interface UsersContextProps {
     tableUsers: User[]
     tablePagination: UsersPagination
     fetchPage: (page: number) => void
+    fetchQuery: (query: string) => void
+    clearQuery: () => void
 }
 
 // force to set the defaultValue to undefined
