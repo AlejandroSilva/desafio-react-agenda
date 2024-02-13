@@ -10,7 +10,7 @@ interface UsersTableProps {
     showError: (content: string) => void
 }
 
-const getColumns = (deleteHandler: (id: number) => void): TableProps<User>['columns'] => ([
+const getColumns = (deleteHandler: (id: number, name: string) => void): TableProps<User>['columns'] => ([
     {
         title: 'Nombre',
         key: 'name',
@@ -34,7 +34,7 @@ const getColumns = (deleteHandler: (id: number) => void): TableProps<User>['colu
         render: (_, record) => (
             <DeleteOutlined
                 style={{ fontSize: '24px' }}
-                onClick={() => deleteHandler(record.id)}
+                onClick={() => deleteHandler(record.id, record.name)}
             />
         )
     }
@@ -42,10 +42,10 @@ const getColumns = (deleteHandler: (id: number) => void): TableProps<User>['colu
 
 const UsersTable: FC<UsersTableProps> = ({ showSuccess, showError }): ReactElement => {
     const { tableUsers, tablePagination, fetchPage, deleteUser } = useUsersContext()
-    const deleteHandler = (id: number) => {
+    const deleteHandler = (id: number, name: string) => {
         deleteUser(id)
-            .then(() => showSuccess('Usuario eliminado correctamente'))
-            .catch(() => showError('Ocurrio un error al eliminar'))
+            .then(() => showSuccess(`Usuario "${name}" eliminado`))
+            .catch(() => showError(`Ocurrio un error al eliminar a "${name}"`))
     }
 
     return (
