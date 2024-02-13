@@ -42,8 +42,6 @@ export const UsersProvider: FC<UsersProviderProps> = ({ children }): ReactElemen
             })
     }
 
-    const clearQuery = (): void => fetchQuery(DEFAULT_QUERY)
-
     useEffect(() => {
         fetchPage(1)
     }, [])
@@ -54,7 +52,6 @@ export const UsersProvider: FC<UsersProviderProps> = ({ children }): ReactElemen
             tablePagination,
             fetchPage,
             fetchQuery,
-            clearQuery,
         }} >
             {children}
         </UsersContext.Provider>
