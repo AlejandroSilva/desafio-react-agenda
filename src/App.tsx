@@ -1,18 +1,22 @@
-import {FC, ReactElement, useState} from "react"
+import { FC, ReactElement } from "react"
 
-interface AppProps {
-    total: number
-}
+import { UsersProvider } from "./context"
+import { UsersTable } from "./UsersTable.tsx"
 
-const App: FC<AppProps> = ({ total }) : ReactElement => {
-    const [count, setCount] = useState(total)
+const App: FC = () : ReactElement => {
     return (
-        <div>
-            <h1>React + ts is working {count}</h1>
-            <button onClick={() => setCount(count => count+1)}>
-                +1
-            </button>
-        </div>
+        <UsersProvider>
+            <section>
+                <h1>Agenda Previred - Mi agenda de contactos laboral</h1>
+                <p>Aqui podrá encontrar o buscar todos sus contactos agregados, agregar nuevos contactos, y
+                    eliminar contactos no deseados.</p>
+
+                <button>Agregar Contacto</button>
+                <input type="text"/>
+
+                <UsersTable/>
+            </section>
+        </UsersProvider>
     )
 }
 

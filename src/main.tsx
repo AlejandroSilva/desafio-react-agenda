@@ -5,6 +5,6 @@ import App from './App.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <App total={123}/>
+        <App />
     </React.StrictMode>,
 )
