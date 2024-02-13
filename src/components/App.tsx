@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react"
 
-import { UsersProvider } from "./context"
+import { UsersProvider } from "../context"
 import { UsersTable } from "./UsersTable.tsx"
 
 const App: FC = () : ReactElement => {

@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react"
 
-import { useUsersContext } from "./context"
+import { useUsersContext } from "../context"
 
 interface UsersTableProps {}
 
