@@ -1,10 +1,10 @@
 import { Context, createContext } from "react"
 
-import { User } from "../services/UsersApi.ts"
+import { User, UsersPagination } from "../services/UsersApi.ts"
 
 export interface UsersContextProps {
-    users: User[]
-    currentPage: number
+    tableUsers: User[]
+    tablePagination: UsersPagination
     fetchPage: (page: number) => void
 }
 
